@@ -1,0 +1,118 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; /*учитывает значения внутренних отступов и границ элемента при подсчёте*/
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  background: url(./img/Phone.png);
+  background-size: cover;
+}
+
+.wrapper{
+  margin: auto;
+}
+
+.div_button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+#button {
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    font-size: 25px;
+    padding: 0px;
+    color: white;
+    position: relative;
+    margin-top: 0px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.titleWitcher{ /*"The Witcher Cards"*/
+  text-align: center;
+  margin: 5px auto 10px;
+  font-size: 50px;
+  text-indent: 0;
+  color: aliceblue;
+}
+
+.memory-game {
+  width: 700px;
+  height: auto;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap; /*перенос на др.строку*/
+  align-content: flex-start;
+  perspective: 1000px; /*объемность по оси z*/
+}
+
+.memory-card {
+  width: calc(25% - 10px);
+  height: 165px;
+  margin: 5px;
+  position: relative;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .5s; /*длительность поворота*/
+  /*box-shadow: 5px 5px 5px rgba(0,0,0,.3);*/
+}
+
+.memory-card:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform .3s;
+}
+
+.memory-card:active {
+  transform: scale(0.97); /*при нажатии картинка чуть уменьшается*/
+  transition: transform .3s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg); /*поворот по вертикали*/
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  position: absolute;
+  border-radius: 5px;
+  backface-visibility: hidden;
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
+
+.alert { /*"Вы выиграли/проиграли"*/
+    padding: 15px;
+    border-radius: 4px;
+    color: white;
+    background-color: steelblue;
+    font-size: 40px;
+    width: 320px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: calc(50% - 15px - 40px/2);
+    left: calc(50% - 15px - 320px/2);
+}
+
+.pro { /*"Играть ещё раз"*/
+    cursor: pointer;
+}
+
+.show {
+  display: block;
+}
