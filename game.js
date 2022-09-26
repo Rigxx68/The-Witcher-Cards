@@ -95,13 +95,13 @@ const endQuestion = () => {
 timer = setInterval(function () {
     seconds = timeMinut%60
     minutes = timeMinut/60
-    hour = timeMinut/60/60
     if (timeMinut <= 0) {
+        buttonRun.innerHTML = '00:00';
         clearInterval(timer);
         if(document.getElementById('stop_game')!= null){ 
             let div = document.createElement('div');
             div.className = "alert";
-            div.innerHTML = "<strong>Вы проиграли!</strong>";
+            div.innerHTML = "<strong>Вас повесили!</strong>";
 
             document.body.append(div);
             
@@ -113,7 +113,7 @@ timer = setInterval(function () {
         else {
             let div = document.createElement('div');
             div.className = "alert";
-            div.innerHTML = "<strong>Вы выиграли!</strong>";
+            div.innerHTML = "<strong>Вы выжили!</strong>";
 
             document.body.append(div);
             
@@ -124,7 +124,10 @@ timer = setInterval(function () {
         }
         
     } else {
-        let strTimer = `${Math.trunc(hour)}:${Math.trunc(minutes)}:${seconds}`;
+        if (seconds<=9) {
+            seconds = "0" + seconds;
+        };
+        let strTimer = 0+`${Math.trunc(minutes)}:${seconds}`;
         buttonRun.innerHTML = strTimer;
         buttonRun.removeEventListener('click', setTimeMinut);
     }
