@@ -95,7 +95,7 @@ const endQuestion = () => {
 timer = setInterval(function () {
     seconds = timeMinut%60
     minutes = timeMinut/60
-    if (timeMinut <= 0) {
+    if (timeMinut <= 0) { //если время на таймере закончилось
         buttonRun.innerHTML = '00:00';
         clearInterval(timer);
         if(document.getElementById('stop_game')!= null){ 
@@ -123,13 +123,29 @@ timer = setInterval(function () {
             unflipCards();
         }
         
-    } else {
+    } else { //если время НЕ закончилось
         if (seconds<=9) {
             seconds = "0" + seconds;
         };
-        let strTimer = 0+`${Math.trunc(minutes)}:${seconds}`;
+        let strTimer = 0+`${Math.trunc(minutes)}:${seconds}`; //таймер с ноликами, чтоб красивый был
         buttonRun.innerHTML = strTimer;
         buttonRun.removeEventListener('click', setTimeMinut);
+
+        if(document.getElementById('stop_game') == null){  //если выиграл до окончания времени
+            buttonRun.innerHTML = strTimer; //таймер с ноликами
+            buttonRun.style.color = 'blue'; //синенький, потому что Победа
+            clearInterval(timer);
+            let div = document.createElement('div');
+            div.className = "alert";
+            div.innerHTML = "<strong>Вы выжили!</strong>";
+
+            document.body.append(div);
+            
+            setTimeout(() => div.remove(), 4000);         
+            
+            endQuestion();
+            unflipCards();
+        }
     }
     --timeMinut;
     if (timeMinut <=9) {
